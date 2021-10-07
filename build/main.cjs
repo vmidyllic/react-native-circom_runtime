@@ -44,7 +44,7 @@ function flatArray(a) {
 }
 
 function fnvHash(str) {
-    return fnv__default["default"].hash(str, 64).hex();
+    return fnv__default['default'].hash(str, 64).hex();
 }
 
 /* globals WebAssembly */
