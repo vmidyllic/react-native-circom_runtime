@@ -3,7 +3,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var fnv = require('fnv-plus');
-var ffjavascript = require('ffjavascript');
+var reactNativeFfjavascript = require('react-native-ffjavascript');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
@@ -44,7 +44,7 @@ function flatArray(a) {
 }
 
 function fnvHash(str) {
-    return fnv__default['default'].hash(str, 64).hex();
+    return fnv__default["default"].hash(str, 64).hex();
 }
 
 /* globals WebAssembly */
@@ -155,14 +155,14 @@ class WitnessCalculator {
             arr[this.n32-1-i] = this.i32[(pRawPrime >> 2) + i];
         }
 
-        this.prime = ffjavascript.Scalar.fromArray(arr, 0x100000000);
+        this.prime = reactNativeFfjavascript.Scalar.fromArray(arr, 0x100000000);
 
-        this.Fr = new ffjavascript.F1Field(this.prime);
+        this.Fr = new reactNativeFfjavascript.F1Field(this.prime);
 
-        this.mask32 = ffjavascript.Scalar.fromString("FFFFFFFF", 16);
+        this.mask32 = reactNativeFfjavascript.Scalar.fromString("FFFFFFFF", 16);
         this.NVars = this.instance.exports.getNVars();
         this.n64 = Math.floor((this.Fr.bitLength - 1) / 64)+1;
-        this.R = this.Fr.e( ffjavascript.Scalar.shiftLeft(1 , this.n64*64));
+        this.R = this.Fr.e( reactNativeFfjavascript.Scalar.shiftLeft(1 , this.n64*64));
         this.RInv = this.Fr.inv(this.R);
         this.sanityCheck = sanityCheck;
     }
@@ -251,7 +251,7 @@ class WitnessCalculator {
             for (let i=0; i<self.n32; i++) {
                 arr[self.n32-1-i] = self.i32[idx+2+i];
             }
-            const res = self.Fr.e(ffjavascript.Scalar.fromArray(arr, 0x100000000));
+            const res = self.Fr.e(reactNativeFfjavascript.Scalar.fromArray(arr, 0x100000000));
             if (self.i32[idx + 1] & 0x40000000) {
                 return fromMontgomery(res);
             } else {
@@ -286,9 +286,9 @@ class WitnessCalculator {
         {
             let a;
             if (self.Fr.geq(v, self.Fr.zero)) {
-                a = ffjavascript.Scalar.toNumber(v);
+                a = reactNativeFfjavascript.Scalar.toNumber(v);
             } else {
-                a = ffjavascript.Scalar.toNumber( self.Fr.sub(v, minShort));
+                a = reactNativeFfjavascript.Scalar.toNumber( self.Fr.sub(v, minShort));
                 a = a - 0x80000000;
                 a = 0x100000000 + a;
             }
@@ -299,7 +299,7 @@ class WitnessCalculator {
 
         self.i32[(p >> 2)] = 0;
         self.i32[(p >> 2) + 1] = 0x80000000;
-        const arr = ffjavascript.Scalar.toArray(v, 0x100000000);
+        const arr = reactNativeFfjavascript.Scalar.toArray(v, 0x100000000);
         for (let i=0; i<self.n32; i++) {
             const idx = arr.length-1-i;
 

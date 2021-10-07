@@ -18,7 +18,7 @@ limitations under the License.
 */
 
 import { flatArray, fnvHash } from "./utils.js";
-import { Scalar, F1Field } from "ffjavascript";
+import { Scalar, F1Field } from "react-native-ffjavascript";
 
 export default async function builder(code, options) {
 
